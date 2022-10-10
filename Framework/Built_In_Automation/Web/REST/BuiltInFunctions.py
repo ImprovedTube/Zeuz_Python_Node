@@ -869,7 +869,7 @@ def handle_rest_call(
             elif method in ("get", "head"):
                 result = session.request(
                     method=method,
-                    url=url,
+                    url=url.encode("utf-8"),
                     headers=headers,
                     verify=False,
                     timeout=timeout,
@@ -1489,9 +1489,9 @@ def Validate_Step_Data(step_data):
 
             elif each[1].lower().strip() in ("header", "headers"):
                 if headers == "{":
-                    headers += '"%s" : "%s"' % (each[0], each[2])
+                    headers += '"%s" : "%s"' % (each[0].encode("utf-8"), each[2].encode("utf-8"))
                 else:
-                    headers += ', "%s" : "%s"' % (each[0], each[2])
+                    headers += ', "%s" : "%s"' % (each[0].encode("utf-8"), each[2].encode("utf-8"))
 
         headers += "}"
         if not plain_body_text:
