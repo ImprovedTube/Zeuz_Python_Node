@@ -409,11 +409,8 @@ def get_performance_metrics(dataset):
         # from selenium.webdriver.common.devtools.v101.performance import enable, disable, get_metrics
         # from selenium.webdriver.chrome.webdriver import ChromiumDriver
 
-        metrics = selenium_details[driver_id]["driver"].execute_cdp_cmd('Performance.getMetrics', {})
-        perf_json_data = {data["name"]: data["value"] for data in metrics["metrics"]}
-        Shared_Resources.Set_Shared_Variables(var_name,perf_json_data)
-        CommonUtil.browser_perf[current_driver_id].append(perf_json_data)
-        return "passed"
+        collect_browser_metrics(selenium_driver, current_driver_id)
+
     except:
         return CommonUtil.Exception_Handler(sys.exc_info())
 
@@ -1001,7 +998,11 @@ def Go_To_Link(step_data, page_title=False):
     except Exception:
         ErrorMessage = "failed to open your link: %s" % (web_link)
         return CommonUtil.Exception_Handler(sys.exc_info(), None, ErrorMessage)
+    
+    return collect_browser_metrics(selenium_driver, current_driver_id)
 
+
+def collect_browser_metrics(selenium_driver, current_driver_id):
     # Collect custom performance metrics
     try:
         if current_driver_id not in CommonUtil.browser_perf:
@@ -2646,7 +2647,7 @@ def Sleep(step_data):
 def Scroll(step_data):
     sModuleInfo = inspect.currentframe().f_code.co_name + " : " + MODULE_NAME
     global selenium_driver
-    selenium_driver.switch_to_default_content()
+    selenium_driver.switch_to.default_content()
     try:
         scroll_inside_element = False
         scroll_window_name = "window"
