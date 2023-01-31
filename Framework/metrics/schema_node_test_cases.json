@@ -28,5 +28,17 @@
         "name": "time_stamp",
         "type": "TIMESTAMP",
         "mode": "REQUIRED"
+    },
+    {
+        "name": "ignore",
+        "type": "BOOLEAN",
+        "mode": "NULLABLE",
+        "description": "Indicates whether this data should be ignored for dashboard or not"
+    },
+    {
+        "name": "user_label",
+        "type": "STRING",
+        "mode": "NULLABLE",
+        "description": "User specifiable custom label"
     }
 ]

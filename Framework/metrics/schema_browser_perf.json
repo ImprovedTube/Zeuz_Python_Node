@@ -218,5 +218,17 @@
         "name": "largest_contentful_paint",
         "type": "FLOAT",
         "mode": "NULLABLE"
+    },
+    {
+        "name": "ignore",
+        "type": "BOOLEAN",
+        "mode": "NULLABLE",
+        "description": "Indicates whether this data should be ignored for dashboard or not"
+    },
+    {
+        "name": "user_label",
+        "type": "STRING",
+        "mode": "NULLABLE",
+        "description": "User specifiable custom label"
     }
 ]
