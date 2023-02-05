@@ -7,6 +7,7 @@
 - **[Add]** Added -spu or --stop_pip_auto_update to disable auto python module update
 - **[Add]** Immediate parent support in windows path
 - **[Add]** Add Open Empty Browser Action
+- **[Add]** For loop action can do step looping
 
 ### [16.1.0][Oct 25, 2022]
 - **[Add]** Continue to next iter feature is implemented in For Loop Action
