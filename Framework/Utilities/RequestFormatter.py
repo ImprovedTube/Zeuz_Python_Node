@@ -1,6 +1,7 @@
 # -- coding: utf-8 --
 # -- coding: cp1252 --
 
+import traceback
 from . import ConfigModule
 import requests
 import json
@@ -61,6 +62,7 @@ def Post(resource_path, payload=None, **kwargs):
             **kwargs
         ).json()
     except Exception as e:
+        traceback.print_exc()
         print("Post Exception: {}".format(e))
         return {}
 
@@ -79,6 +81,7 @@ def Get(resource_path, payload=None, **kwargs):
         ).json()
 
     except requests.exceptions.RequestException:
+        traceback.print_exc()
         print(
             "Exception in UpdateGet: Authentication Failed. Please check your server, username and password. "
             "Please include full server name. Example: https://zeuz.zeuz.ai.\n"
@@ -87,6 +90,7 @@ def Get(resource_path, payload=None, **kwargs):
         return ""
 
     except Exception as e:
+        traceback.print_exc()
         print("Get Exception: {}".format(e))
         return {}
 
@@ -106,6 +110,7 @@ def UpdatedGet(resource_path, payload=None, **kwargs):
         ).json()
 
     except requests.exceptions.RequestException as e:
+        traceback.print_exc()
         print(
             "Exception in UpdateGet: Authentication Failed. Please check your server, username and password. "
             "Please include full server name. Example: https://zeuz.zeuz.ai"
@@ -114,6 +119,7 @@ def UpdatedGet(resource_path, payload=None, **kwargs):
         return ""
 
     except Exception as e:
+        traceback.print_exc()
         print("Get Exception: {}".format(e))
         return {}
 
@@ -130,6 +136,7 @@ def Head(resource_path, **kwargs):
         )
 
     except requests.exceptions.RequestException:
+        traceback.print_exc()
         print(
             "Exception in Head: Please check your server address "
             "Please include full server name. Example: https://zeuz.zeuz.ai"
@@ -137,5 +144,6 @@ def Head(resource_path, **kwargs):
         )
         return False
     except Exception as e:
+        traceback.print_exc()
         print("Exception in Head {}".format(e))
         return False
