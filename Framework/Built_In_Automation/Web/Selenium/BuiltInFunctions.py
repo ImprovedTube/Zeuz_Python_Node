@@ -430,6 +430,7 @@ def use_xvfb_or_headless(callback):
             global vdisplay
             vdisplay = Xvfb(width=1920, height=1080, colordepth=16)
             vdisplay.start()
+            # pass
         except:
             CommonUtil.ExecLog(
                 sModuleInfo,
@@ -565,11 +566,14 @@ def Open_Browser(dependency, window_size_X=None, window_size_Y=None, capability=
             d['goog:loggingPrefs'] = {'performance': 'ALL'}
 
             if "chromeheadless" in browser:
-                def chromeheadless():
-                    options.add_argument(
-                        "--headless=new"
-                    )
-                use_xvfb_or_headless(chromeheadless)
+                options.add_argument(
+                    "--headless=new"
+                )
+                # def chromeheadless():
+                #     options.add_argument(
+                #         "--headless=new"
+                #     )
+                # use_xvfb_or_headless(chromeheadless)
 
             global initial_download_folder
             initial_download_folder = download_dir = ConfigModule.get_config_value("sectionOne", "initial_download_folder", temp_config)
