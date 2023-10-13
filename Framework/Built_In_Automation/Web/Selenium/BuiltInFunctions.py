@@ -5125,11 +5125,42 @@ def resize_window(step_data):
         return "passed"
     except Exception:
         return CommonUtil.Exception_Handler(sys.exc_info(), None, "Error resizing window")
+@logger
+def wait_for_element_to_be_clickable(data_set):
+    """Wait for element to be clickable"""
 
-    
-        
+    global selenium_driver
 
+    locator_name: str = ""
+    locator_value: str = ""
+    wait_in_seconds: float = 0
+    try:
+        for left, mid, right in data_set:
+            left = left.lower().strip()
+            mid = mid.lower().strip()
+            if mid == "element parameter":
+                if left == "text":
+                    left = "link text"
+                elif left == "tag":
+                    left = "tag name"
+                elif left == "class":
+                    left = "class name"
+                locator_name = left
+                locator_value = right
+            elif left == "wait for element to be clickable":
+                wait_in_seconds = float(right)
+        WebDriverWait(selenium_driver, wait_in_seconds).until(
+            EC.element_to_be_clickable((locator_name, locator_value))
+        )
+        return "passed"
+    except Exception:
+        # return CommonUtil.Exception_Handler(sys.exc_info(), None, "Error parsing data set")
 
-
-
-                
+        # Catch any exceptions that may occur during the waiting process and provide detailed information.
+        # This block will capture the exception and its traceback.
+        import traceback
+        exc_info = sys.exc_info()
+        error_message = f"An exception occurred: {exc_info[1]}\n"
+        traceback_text = "".join(traceback.format_exception(exc_info[0], exc_info[1], exc_info[2]))
+        error_message += f"Traceback:\n{traceback_text}"
+        return error_message
